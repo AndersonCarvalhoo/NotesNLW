@@ -80,10 +80,15 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
       speechRecognition.stop();
     }
   };
+
+  const openAndClearPreviousText = () => {
+    setContent('')
+    setShouldShowOnBoarding(true)
+  }
   return (
     <Dialog.Root>
       <Dialog.Trigger
-        onClick={() => setShouldShowOnBoarding(true)}
+        onClick={openAndClearPreviousText}
         className="rounded-nd flex flex-col gap-3 text-left bg-slate-700 p-5 hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400 outline-none"
       >
         <span className="text-small font-medium text-slate-200">
@@ -98,7 +103,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
       <Dialog.Portal>
         <Dialog.Overlay className="inset-0 fixed bg-black/60" />
         <Dialog.Content className="outline-none fixed inset-0 md:inset-auto overflow-hidden md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[640px] w-full md:h-[60vh] bg-slate-700 flex flex-col md:rounded-md">
-          <Dialog.Close className="absolute top-0 right-0 p-1.5 text-slate-400 bg-slate-800 hover:text-slate-100">
+          <Dialog.Close onClick={handleStopRecording} className="absolute top-0 right-0 p-1.5 text-slate-400 bg-slate-800 hover:text-slate-100">
             <X className="size-5" />
           </Dialog.Close>
           <form className="flex h-full flex-col">
