@@ -28,7 +28,7 @@ export function App() {
 
     const notesArray = [newNote, ...notes];
 
-    setNotes(notesArray);
+    setNotes(notesArray)
 
     localStorage.setItem("notes", JSON.stringify(notesArray));
   };

@@ -3,8 +3,8 @@ import { X } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 
-let speechRecognition: SpeechRecognition | null = null
-export function NewNoteCard({ onNotedCreated }) {
+let speechRecognition: SpeechRecognition | null = null;
+export function NewNoteCard({ onNoteCreated }) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [content, setContent] = useState("");
@@ -27,7 +27,7 @@ export function NewNoteCard({ onNotedCreated }) {
       toast.error("Digite algo!");
       return;
     }
-    onNotedCreated(content);
+    onNoteCreated(content);
 
     setShouldShowOnBoarding(true);
     setContent("");
@@ -71,8 +71,8 @@ export function NewNoteCard({ onNotedCreated }) {
   const handleStopRecording = () => {
     setIsRecording(false);
 
-    if(speechRecognition !== null) {
-      speechRecognition.stop()
+    if (speechRecognition !== null) {
+      speechRecognition.stop();
     }
   };
   return (
