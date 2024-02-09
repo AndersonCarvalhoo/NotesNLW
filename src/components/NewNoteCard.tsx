@@ -1,13 +1,18 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
 
+interface NewNoteCardProps {
+  onNoteCreated: (content: string) => void;
+}
 let speechRecognition: SpeechRecognition | null = null;
-export function NewNoteCard({ onNoteCreated }) {
+
+export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [content, setContent] = useState("");
+  
   const handleStartTextArea = () => {
     setShouldShowOnBoarding(false);
   };
@@ -78,7 +83,7 @@ export function NewNoteCard({ onNoteCreated }) {
   return (
     <Dialog.Root>
       <Dialog.Trigger
-        onClick={handleClickedAddNote}
+        onClick={() => setShouldShowOnBoarding(true)}
         className="rounded-nd flex flex-col gap-3 text-left bg-slate-700 p-5 hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400 outline-none"
       >
         <span className="text-small font-medium text-slate-200">

@@ -6,13 +6,14 @@ import { NoteCard } from "./components/NoteCard";
 interface Note {
   id: string;
   date: Date;
-  content: String;
+  content: string;
 }
 
 export function App() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState<Note[]>(() => {
     const notesOnStorage = localStorage.getItem("notes");
+
     if (notesOnStorage) {
       return JSON.parse(notesOnStorage);
     }
@@ -21,14 +22,14 @@ export function App() {
 
   const onNoteCreated = (content: string) => {
     const newNote = {
-      id: crypto.randomUUID,
+      id: crypto.randomUUID(),
       date: new Date(),
       content,
     };
 
     const notesArray = [newNote, ...notes];
 
-    setNotes(notesArray)
+    setNotes(notesArray);
 
     localStorage.setItem("notes", JSON.stringify(notesArray));
   };
@@ -77,11 +78,7 @@ export function App() {
         {/*Está mapeando os elementos que incluem oq digitou */}
         {filteredNotes.map((note) => {
           return (
-            <NoteCard
-              note={note}
-              key={note.id}
-              onNoteDeleted={onNoteDeleted}
-            />
+            <NoteCard note={note} key={note.id} onNoteDeleted={onNoteDeleted} />
           );
         })}
       </div>
